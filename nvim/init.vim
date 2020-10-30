@@ -57,6 +57,7 @@ Plug 'radenling/vim-dispatch-neovim'
 Plug 'clojure-vim/vim-jack-in'
 
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 Plug 'sainnhe/sonokai'
 
