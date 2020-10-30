@@ -1,13 +1,15 @@
 # NVIM Cheat sheet
 
-Default leader = Space
-Default local leader = ,
+> Default leader = "Space"
+> 
+> Default local leader = ","
 
 ## Clojure
 ### Repl (Conjure)
-|| shortcut || What does it do? ||
+| shortcut | What does it do? |
+|----|-------|
 | `:Lein`     | Open a lein repl on a new window |
-| `:Dispatch lein repl` | Open a lein repl on a buffer |
+| `<leader>r` | Open a lein repl on a buffer (`:Dispatch lein repl`) |
 | `:ConjureConnect` | Connect the conjure to a repl by .nrepl-port |
 | `<localleader>eb` | Evaluate the current buffer |
 | `<localleader>ee` | Evaluate the inner form under the cursor |
