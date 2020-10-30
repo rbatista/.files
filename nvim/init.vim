@@ -48,8 +48,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " repl + autocomplete by nrepl + cider
-" Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
-Plug 'tpope/vim-fireplace' 
+Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
 
 " run commands in background"
 Plug 'tpope/vim-dispatch'
@@ -125,8 +124,8 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
 " open nerdtree if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " exit vim if only nerdtree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -134,7 +133,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeQuitOnOpen=1
 let g:NERDTreeGitStatusUseNerdFonts = 1
 
+" FZF
 nnoremap <silent><C-p> :Files<CR>
+" close fzf when pressing escape
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
 " Clojure
 let g:sexp_enable_insert_mode_mappings = 1
@@ -145,21 +147,6 @@ let g:clojure_maxlines = 100
 let g:clj_refactor_prefix_rewriting=0
 
 " CLOJURE BINDINGS
-nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
-nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
-nmap <Leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)``
-nmap <Leader>d [<C-D>
-nmap <Leader>E :%Eval<CR>
-nmap <Leader>R cqp(require 'clojure.tools.namespace.repl) (clojure.tools.namespace.repl/refresh)<CR>
-nmap <Leader>w( ysie)
-nmap <Leader>w[ ysie]
-nmap <Leader>w{ ysie}
-nmap <Leader>w" ysie"
-vmap <Leader>w( S)
-vmap <Leader>w[ S]
-vmap <Leader>w{ S}
-vmap <Leader>w" S"
-
 nmap <S-Right> <Plug>(sexp_capture_next_element)<Plug>(sexp_indent)
 nmap <S-Left> <Plug>(sexp_emit_tail_element)<Plug>(sexp_indent)
 imap <S-Right> <C-O><Plug>(sexp_capture_next_element)<C-O><Plug>(sexp_indent)
@@ -263,9 +250,4 @@ autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(
   setl readonly
 endfunction
 
-"highlight Normal guibg=#101010 guifg=white
-"highlight CursorColumn guibg=#202020
-"highlight Keyword guifg=#FFAB52
-"highlight CursorLine guibg=#202020
-"hi clear CocHighlightText
-"hi CocHighlightText guibg=#472004
+nmap <leader>r :Dispatch lein repl<cr>
