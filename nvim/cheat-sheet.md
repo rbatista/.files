@@ -20,13 +20,20 @@
 | `<localleader>E` | Evaluate visual selection | 
 | `<localleader>E[motion]`| Evaluate any give motion, eg. `<localleader>Eiw` evaluate a word |
 | `<localleader>Ea(` | Evaluate a form |
+| `<localleader>ls` | Open repl log buffer horizontally |
+| `<localleader>lv` | Open repl log buffer vertically |
+| `<localleader>lt` | Open repl log buffer in new tab |
+
+### Code navigation
+
+| shortcut | What does it do? |
+| -------- | ---------------- |
 | `K` | Look up documentation for the word under the cursor |
 | `gd` | Go to definition of the word under the cursor |
 
-
-
-
-You can open the log buffer in a few ways:
-Horizontally - <localleader>ls
-Vertically - <localleader>lv
-New tab - <localleader>lt
+### Tests
+| shortcut | What does it do? |
+| -------- | ---------------- |
+| `<localleader>ta` | Run all currently loaded tests. |
+| `<localleader>tn` | Run all within this namespace. |
+| `<localleader>tc`   |       Run the specific test under the cursor.
