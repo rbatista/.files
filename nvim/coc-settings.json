@@ -1,0 +1,21 @@
+{
+  "coc.preferences.useQuickfixForLocations": true,
+  "suggest.snippetIndicator": "🍦",
+  "languageserver": {
+    "clojure-lsp": {
+      "command": "bash",
+      "args": ["-c", "~/lsp/clojure-lsp/clojure-lsp"],
+      "filetypes": ["clojure"],
+      "rootPatterns": ["project.clj"],
+      "additionalSchemes": ["jar", "zipfile"],
+      "trace.server": "verbose",
+      "initializationOptions": {
+        "ignore-classpath-directories": true
+      }
+    },
+    "kotlin": {
+      "command": "~/lsp/kotlin-language-server/server/bin/kotlin-language-server",
+      "filetypes": ["kotlin"]
+    }
+  }
+}
