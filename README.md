@@ -1,2 +1,2 @@
 # .files
-Dot files for new vim with integration for clojure
+Dot files for neovim with integration for clojure
