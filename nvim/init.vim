@@ -16,7 +16,6 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
-map <C-n> :NERDTreeToggle<CR>
 
 " Specify a directory for plugins.
 call plug#begin(stdpath('data') . '/plugged')
@@ -134,6 +133,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeQuitOnOpen=1
 let g:NERDTreeGitStatusUseNerdFonts = 1
 
+map <leader>tt :NERDTreeToggle<CR>
+map <leader>tf :NERDTreeFind<cr>
+
 " FZF
 nnoremap <silent><C-p> :Files<CR>
 " close fzf when pressing escape
@@ -183,9 +185,12 @@ let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
-nmap <leader>u <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 command! -nargs=0 Format :call CocAction('format')
+nmap <leader>rn <Plug>(coc-rename)
 
 "let g:coc_enable_locationlist = 0
 "autocmd User CocLocationsChange CocList --normal location
@@ -251,4 +256,22 @@ autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(
   setl readonly
 endfunction
 
-nmap <leader>r :Dispatch lein repl<cr>
+nmap <leader>rs :Dispatch lein repl<cr>
+nmap <leader>rb :Dispatch! lein repl<cr>
+
+
+function! GotoJump()
+  jumps
+  let j = input("Please select your jump: ")
+  if j != ''
+    let pattern = '\v\c^\+'
+    if j =~ pattern
+      let j = substitute(j, pattern, '', 'g')
+      execute "normal " . j . "\<c-i>"
+    else
+      execute "normal " . j . "\<c-o>"
+    endif
+  endif
+endfunction
+
+nmap <Leader>j :call GotoJump()<CR>

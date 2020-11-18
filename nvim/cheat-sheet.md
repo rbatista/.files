@@ -4,7 +4,31 @@
 > 
 > Default local leader = ","
 
+## Vim basics
+| shortcut | What does it do? |
+|----|-------|
+| `Ctrl + o` | Normal mode: Jump back to the previous location |
+| `Ctrl + i` | Normal mode: Jump forward to the next locations |
+| `<Leader>j` | Go to jump (it will open the jump list) | 
+
 ## Clojure
+
+### Edition
+| shortcut | What does it do? |
+|----|-------|
+| `daf`     | Delete a form |
+| `dif`     | Delete the inner form |
+| `yaf`     | Copy form |
+| `yif`     | Copy the inner form |
+| `<LocalLeader>h` | Insert at the begin of the current form |
+| `<LocalLeader>l` | Insert at the end of the current form |
+| `cse(` | Surround with parentheses |
+| `cse[` | Surround with brackets |
+| `cse{` | Surround with braces |
+| `>)` and `<)`| Slurpage |
+| `<I` | Insert at the beginning of a form |
+| `>I` | Insert at the ending of a form |
+
 ### Repl (Conjure)
 | shortcut | What does it do? |
 |----|-------|
@@ -20,6 +44,8 @@
 | `<localleader>E` | Evaluate visual selection | 
 | `<localleader>E[motion]`| Evaluate any give motion, eg. `<localleader>Eiw` evaluate a word |
 | `<localleader>Ea(` | Evaluate a form |
+| `<localleader>rr`  | Refresh all changed namespaces. |
+| `<localleader>ra`  | Refresh all namespaces, even unchanged. |
 | `<localleader>ls` | Open repl log buffer horizontally |
 | `<localleader>lv` | Open repl log buffer vertically |
 | `<localleader>lt` | Open repl log buffer in new tab |
