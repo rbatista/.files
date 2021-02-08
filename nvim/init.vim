@@ -33,6 +33,9 @@ Plug 'tpope/vim-repeat', { 'for': 'clojure'}
 Plug 'tpope/vim-surround', { 'for': 'clojure'}
 Plug 'jiangmiao/auto-pairs', { 'tag': 'v2.0.0' }
 
+Plug 'guns/vim-clojure-static'
+Plug 'kien/rainbow_parentheses.vim'
+
 " Plug 'Shougo/deoplete.nvim'
 Plug 'ncm2/float-preview.nvim'
 "
@@ -75,6 +78,8 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " Initialize plugin system.
 call plug#end()
 
+"startify - change dir root
+let g:startify_change_to_vcs_root = 1
 
 "let g:deoplete#enable_at_startup = 1
 "call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
@@ -84,6 +89,12 @@ let g:coc_global_extensions = ['coc-conjure']
 let g:float_preview#docked = 0
 let g:float_preview#max_width = 80
 let g:float_preview#max_height = 40
+
+" Rainbow always on
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 let g:ale_linters = {
       \ 'clojure': ['clj-kondo']
@@ -141,10 +152,45 @@ nnoremap <silent><C-p> :Files<CR>
 " close fzf when pressing escape
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
+function! CreateCenteredFloatingWindow()
+    let width = min([&columns - 4, max([80, &columns - 20])])
+    let height = min([&lines - 4, max([20, &lines - 10])])
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
+
+    let top = "╭" . repeat("─", width - 2) . "╮"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+    set winhl=Normal:Floating
+    let opts.row += 1
+    let opts.height -= 2
+    let opts.col += 2
+    let opts.width -= 4
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    au BufWipeout <buffer> exe 'bw '.s:buf
+endfunction
+
+let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
+
+
 " Clojure
 let g:sexp_enable_insert_mode_mappings = 1
 
 let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match', '^context', '^GET', '^PUT', '^POST', '^PATCH', '^DELETE', '^ANY', 'this-as', '^are', '^dofor']
+let g:clojure_fuzzy_indent_blacklist = []
+let g:clojure_fuzzy_indent = 1
+let g:clojure_align_multiline_strings = 1
+let g:clojure_align_subforms = 1
+let g:clojure_syntax_keywords = {
+    \ 'clojureDefine': ["defflow", "defproject", "defcustom", "s/defn", "s/defmethod", "s/def", "s/defrecord", "s/defschema", "deftest", "defspec", "defresolver", "defmutation"],
+    \ 'clojureMacro': ["s/with-fn-validation", "with-system", "flow"],
+    \ 'clojureFunc': ["are", "is", "testing", "match?",  "match"]
+    \ }
 let g:clojure_align_multiline_strings = 1
 let g:clojure_maxlines = 100
 let g:clj_refactor_prefix_rewriting=0
@@ -275,3 +321,8 @@ function! GotoJump()
 endfunction
 
 nmap <Leader>j :call GotoJump()<CR>
+
+" enable mouse navigation
+set mouse=a
+set listchars=tab:>·,trail:·,extends:>,precedes:<
+set list

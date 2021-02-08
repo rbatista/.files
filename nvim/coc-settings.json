@@ -1,6 +1,8 @@
 {
   "coc.preferences.useQuickfixForLocations": true,
   "suggest.snippetIndicator": "🍦",
+  "suggest.removeDuplicateItems": true,
+  "suggest.echodocSupport": true,
   "languageserver": {
     "clojure-lsp": {
       "command": "bash",
