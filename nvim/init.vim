@@ -1,89 +1,13 @@
-nnoremap <SPACE> <Nop>
-let mapleader=" "
-let maplocalleader="," 
+source $HOME/.config/nvim/general/settings.vim
+source $HOME/.config/nvim/vim-plug/plugins.vim
+source $HOME/.config/nvim/keys/mappings.vim
 
-:tnoremap <Esc> <C-\><C-n>
-
-" Go to tab by number
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
-
-
-" Specify a directory for plugins.
-call plug#begin(stdpath('data') . '/plugged')
-
-" Specify your required plugins here.
-Plug 'liuchengxu/vim-better-default'
-Plug 'easymotion/vim-easymotion'
-
-" Support to syntax highlight of a lot of langs
-Plug 'sheerun/vim-polyglot'
-
-Plug 'guns/vim-sexp', { 'for': 'clojure'}
-Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure'}
-Plug 'tpope/vim-repeat', { 'for': 'clojure'}
-Plug 'tpope/vim-surround', { 'for': 'clojure'}
-Plug 'jiangmiao/auto-pairs', { 'tag': 'v2.0.0' }
-
-Plug 'guns/vim-clojure-static'
-Plug 'kien/rainbow_parentheses.vim'
-
-" Plug 'Shougo/deoplete.nvim'
-Plug 'ncm2/float-preview.nvim'
-"
-" smart as vscode + lsp support
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Asynchronous Lint Engine
-Plug 'w0rp/ale'
-
-" fuzzy search
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" repl + autocomplete by nrepl + cider
-Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
-
-" run commands in background"
-Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
-" Jack in to Boot, Clj & Leiningen from Vim
-Plug 'clojure-vim/vim-jack-in'
-
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-Plug 'sainnhe/sonokai'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
-Plug 'mhinz/vim-startify'
-
-Plug 'Yggdroot/indentLine'
-
-" vertical selection
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-" Initialize plugin system.
-call plug#end()
+source $HOME/.config/nvim/plug-config/ale.vim
+source $HOME/.config/nvim/plug-config/airline.vim
 
 "startify - change dir root
 let g:startify_change_to_vcs_root = 1
 
-"let g:deoplete#enable_at_startup = 1
-"call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
-"set completeopt-=preview
 let g:coc_global_extensions = ['coc-conjure']
 
 let g:float_preview#docked = 0
@@ -96,9 +20,6 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-let g:ale_linters = {
-      \ 'clojure': ['clj-kondo']
-      \}
 
 " Important!!
 if has('termguicolors')
@@ -111,29 +32,6 @@ let g:sonokai_enable_italic = 0
 let g:sonokai_disable_italic_comment = 1
 colorscheme sonokai
         
-" airline
-let g:airline_theme = 'sonokai'
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 0
-let g:airline#extensions#tabline#buffer_nr_format = '%s|'
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#current_first = 0
-let g:airline#extensions#tabline#show_splits = 1
-let g:airline_powerline_fonts = 1
-
-nmap [b <Plug>AirlineSelectPrevTab
-nmap ]b <Plug>AirlineSelectNextTab
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-
 " open nerdtree if no files were specified
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -224,10 +122,6 @@ let g:sexp_mappings = {
       \ 'sexp_flow_to_next_open_bracket': '<M-f>',
       \ 'sexp_flow_to_prev_open_bracket': '<M-b>',
       \ }
-
-" COC
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -322,7 +216,3 @@ endfunction
 
 nmap <Leader>j :call GotoJump()<CR>
 
-" enable mouse navigation
-set mouse=a
-set listchars=tab:>·,trail:·,extends:>,precedes:<
-set list

@@ -3,6 +3,7 @@
   "suggest.snippetIndicator": "🍦",
   "suggest.removeDuplicateItems": true,
   "suggest.echodocSupport": true,
+  "diagnostic.displayByAle": true,
   "languageserver": {
     "clojure-lsp": {
       "command": "bash",

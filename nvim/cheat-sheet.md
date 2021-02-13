@@ -1,12 +1,12 @@
 # NVIM Cheat sheet
 
-> Default leader = "Space"
+> Default leader: `Space`
 > 
-> Default local leader = ","
+> Default local leader: `,`
 
 ## Vim basics
 | shortcut | Mode | What does it do? |
-|----|-------|
+| ---- | ------- | ------ |
 | `Ctrl + o` | Normal | Jump back to the previous location |
 | `Ctrl + i` | Normal | Jump forward to the next locations |
 | `<Leader>j` | Normal | Go to jump (it will open the jump list) |
