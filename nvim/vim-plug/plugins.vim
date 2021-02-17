@@ -7,6 +7,7 @@ Plug 'easymotion/vim-easymotion'
 
 " Support to syntax highlight of a lot of langs
 Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'guns/vim-sexp', { 'for': 'clojure'}
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure'}
