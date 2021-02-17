@@ -27,3 +27,7 @@ function! CreateCenteredFloatingWindow()
 endfunction
 
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
+
+" search only for file content when using Ag
+command! -bang -nargs=* Ag
+            \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
