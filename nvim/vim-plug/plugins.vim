@@ -46,7 +46,10 @@ Plug 'clojure-vim/vim-jack-in'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" themes
 Plug 'sainnhe/sonokai'
+Plug 'rakr/vim-one'
+Plug 'lifepillar/vim-solarized8'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'

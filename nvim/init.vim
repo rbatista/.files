@@ -3,7 +3,7 @@ source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/keys/mappings.vim
 source $HOME/.config/nvim/plug-config/vim-better-defaults.vim
 
-source $HOME/.config/nvim/themes/sonokai.vim
+source $HOME/.config/nvim/themes/settings.vim
 
 source $HOME/.config/nvim/plug-config/ale.vim
 source $HOME/.config/nvim/plug-config/airline.vim
