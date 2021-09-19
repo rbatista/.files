@@ -12,6 +12,10 @@
 | `<Leader>j` | Normal | Go to jump (it will open the jump list) |
 | `<Leader>u` | Normal | Go page up |
 | `<Leader>d` | Normal | Go page down |
+| `dt[char]` | Normal | Delete until next character `[char]` (not included) |
+| `dT[char]` | Normal | Delete until previous character `[char]` (not included) |
+| `df[char]` | Normal | Delete until next character `[char]` (included) |
+| `dF[char]` | Normal | Delete until previous character `[char]` (included) |
 
 https://github.com/liuchengxu/vim-better-default/wiki/a-brief-introduction-to-key-bindings
 
@@ -20,7 +24,7 @@ https://github.com/guns/vim-sexp
 ### Edition
 | shortcut | What does it do? |
 |----|-------|
-| `daf` / `dsf`   | Delete a form |
+| `daf`     | Delete a form |
 | `dif`     | Delete the inner form |
 | `yaf`     | Copy form |
 | `yif`     | Copy the inner form |
@@ -33,6 +37,8 @@ https://github.com/guns/vim-sexp
 | `cse{` | Surround with braces |
 | `<I` | Insert at the beginning of a form |
 | `>I` | Insert at the ending of a form |
+| `ysaf)` | Surround the current form with parentheses |
+| `<Leader>W` | Surround current element with parentheses and change to insert mode |
 | `>)` and `<)`| Slurpage |
 | `>f` | Move form forward |
 | `<f` | Move form backward |
@@ -40,6 +46,7 @@ https://github.com/guns/vim-sexp
 | `<e` | Move element backward |
 | `<Leader>t` | Swap element forward |
 | `<Leader>T` | Swap element backward |
+| `<LocalLeader>@` | `dsf` | Splice the current form into its parent |
 | `<LocalLeader>o`  | Raise a form | 
 | `<Leader>'`  | Raise a element | 
 | `<leader>rn` | Rename (LSP) |
@@ -92,3 +99,30 @@ https://github.com/guns/vim-sexp
 | `<localleader>ta` | Run all currently loaded tests. |
 | `<localleader>tn` | Run all within this namespace. |
 | `<localleader>tc`   | Run the specific test under the cursor. |
+
+## Nerdtree
+| shortcut | What does it do? |
+| -------- | ---------------- |
+| `tt` | Toggle NerdTree. |
+| `tf` | Open NerdTree on current file. |
+| `ma` | On nerdtree > Add a file on the selected directory |
+| `mm` | On nerdtree > Move the selected file |
+| `s` | On nerdtree > Open the selected file in vertical split |
+| `i` | On nerdtree > Open the selected file in horizontal split |
+
+## FZF
+| shortcut | What does it do? |
+| -------- | ---------------- |
+| `<Ctrl> + p` | Open file search (use Ag) |
+| `:AgIn <path>` | Open file to search from the path (use Ag) |
+| `<Ctrl> + x` | [In the file search] Split the buffer horizontally and open the current file in it|
+| `<Ctrl> + v` | [In the file search] Split the buffer vertically and open the current file in it|
+| `<Ctrl> + t` | [In the file search] Open the current file in a new tab|
+
+
+## Git
+| shortcut | What does it do? |
+| -------- | ---------------- |
+| `<leader>hs` | Stage hunk over the cursor (works on visual mode) |
+| `<leader>hu` | Undo hunk over the cursor (works on visual mode) |
+| `<leader>hp` | Preview changes in hunk over the cursor |
