@@ -44,6 +44,7 @@ Plug 'radenling/vim-dispatch-neovim'
 Plug 'clojure-vim/vim-jack-in'
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 
 " themes
@@ -63,5 +64,9 @@ Plug 'Yggdroot/indentLine'
 
 " vertical selection
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+Plug 'Shougo/echodoc.vim'
 " Initialize plugin system.
 call plug#end()
