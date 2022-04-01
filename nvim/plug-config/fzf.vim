@@ -1,5 +1,6 @@
 " FZF
 nnoremap <silent><C-p> :Files<CR>
+nnoremap <silent><C-b> :Buffers<CR>
 " close fzf when pressing escape
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 

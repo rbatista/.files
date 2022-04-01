@@ -16,6 +16,8 @@
 | `dT[char]` | Normal | Delete until previous character `[char]` (not included) |
 | `df[char]` | Normal | Delete until next character `[char]` (included) |
 | `dF[char]` | Normal | Delete until previous character `[char]` (included) |
+| `d$` or `D` | Normal | Delete from current cursor to end of the line |
+| `c$` or `C`| Normal | Delete from current cursor to the end of line and put in the INSERT mode |
 
 https://github.com/liuchengxu/vim-better-default/wiki/a-brief-introduction-to-key-bindings
 
@@ -109,6 +111,10 @@ https://github.com/guns/vim-sexp
 | `mm` | On nerdtree > Move the selected file |
 | `s` | On nerdtree > Open the selected file in vertical split |
 | `i` | On nerdtree > Open the selected file in horizontal split |
+| `I` | Toggle hidden files |
+| `o` | Open/close node |
+| `O` | Open/close node recursively |
+| `R` | Refresh current root |
 
 ## FZF
 | shortcut | What does it do? |

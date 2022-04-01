@@ -7,7 +7,7 @@
   "languageserver": {
     "clojure-lsp": {
       "command": "bash",
-      "args": ["-c", "~/lsp/clojure-lsp/clojure-lsp"],
+      "args": ["-c", "/usr/local/bin/clojure-lsp"],
       "filetypes": ["clojure"],
       "rootPatterns": ["project.clj"],
       "additionalSchemes": ["jar", "zipfile"],

@@ -7,7 +7,6 @@ Plug 'easymotion/vim-easymotion'
 
 " Support to syntax highlight of a lot of langs
 Plug 'sheerun/vim-polyglot'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'guns/vim-sexp', { 'for': 'clojure'}
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure'}
@@ -35,7 +34,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " repl + autocomplete by nrepl + cider
-Plug 'Olical/conjure', { 'tag': 'v4.3.1' }
+Plug 'Olical/conjure'
 
 " run commands in background"
 Plug 'tpope/vim-dispatch'
@@ -55,6 +54,7 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
