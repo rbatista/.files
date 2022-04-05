@@ -1,4 +1,4 @@
-(module plugins.treesitter
+(module modules.treesitter
   {autoload {nvim aniseed.nvim}})
 
 (defn plugins

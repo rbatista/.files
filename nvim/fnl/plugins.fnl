@@ -1,6 +1,5 @@
 (module plugins
-  {autoload {core aniseed.core
-             packer packer}})
+  {autoload {core aniseed.core}})
 
 (defn maybe-require
   [custom-ns]
@@ -18,43 +17,43 @@
   "Iterate over the package list extracting pairs (name, opts)
   and call use from packer for each plugin, it also require
   the namespace from ':custom' key to do some kind of setup (deprecated: prefer modules instead)"
-  (each [name opts (pairs plugins)]
-    (print name)
-    (print opts)
-    ;(import-plugin use name opts)
-    ))
+  (each [_ plugin (ipairs plugins)]
+    (let [name (. plugin 1)
+          opts (. plugin 2)]
+    (import-plugin use name opts))))
 
 (defn import-modules [use modules]
-  (each [index m (ipairs modules)]
-    (let [(ok? plugin) (pcall #(require m))]
-      (print ok?)
-      (print plugin)
-      (when ok?
-        ;(-?> plugin (.plugins (partial import-plugin use)))
+  (each [_ module-ns (ipairs modules)]
+    (print module-ns)
+    (let [mod (require module-ns)]
+      (when mod
+        (mod.plugins (partial import-plugin use))
         ))))
 
 ; List of tuples where the first element is the user/repo as keyword and
 ; the second elementt is the packer options
 (def plugins
-  [{:wbthomason/packer.nvim {}}
-   {:Olical/aniseed {}}
-   {:jiangmiao/auto-pairs {:custom :plugins.auto-pairs}}
+  [[:wbthomason/packer.nvim {}]
+   [:Olical/aniseed {}]
+   [:jiangmiao/auto-pairs {:custom :plugins.auto-pairs}]
 
    ; clojure
-   {:guns/vim-sexp {}}
-   {:tpope/vim-sexp-mappings-for-regular-people {}}
-   {:tpope/vim-repeat {}}
-   {:tpope/vim-surround {}}
+   [:guns/vim-sexp {}]
+   [:tpope/vim-sexp-mappings-for-regular-people {}]
+   [:tpope/vim-repeat {}]
+   [:tpope/vim-surround {}]
 
-   {:kien/rainbow_parentheses.vim {}}
+   [:kien/rainbow_parentheses.vim {}]
 
-   {:marko-cerovac/material.nvim {:custom :theme}}])
+   [:marko-cerovac/material.nvim {:custom :theme}]])
 
 (def modules
-  [:plugins.treesitter])
+  [:modules.treesitter])
 
-;(packer.startup
-;  (fn [use]
-    ;(import-plugins use plugins)
-    ;(import-modules use modules)
-;    ))
+(def packer (require :packer))
+
+(packer.startup
+  (fn [use]
+    (import-plugins use plugins)
+    (import-modules use modules)
+    ))

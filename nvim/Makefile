@@ -7,21 +7,23 @@
 
 NVIM_DATA_PATH := $(shell nvim --headless --noplugin -c ':echo stdpath("data")' +"quitall" 2>&1)
 NVIM_PACKAGE_PATH := "${NVIM_DATA_PATH}/site/pack"
-PACKER_AUTOLOAD_DIR := "${NVIM_PACKAGE_PATH}/packer/start/"
+PACKER_AUTOLOAD_DIR := "${NVIM_PACKAGE_PATH}/packer/start"
 
 all: download_package_manager download_aniseed update
 
 download_package_manager:
-ifneq (,$(wildcard ./${NVIM_PACKAGE_PATH}/packer/start/packer.nvim/))
+	@echo "Checking package manager at ${PACKER_AUTOLOAD_DIR}"
+#ifneq (,$(wildcard ./${PACKER_AUTOLOAD_DIR}/packer.nvim))
 	@echo "Cloning the package manager: Packer"
 	git clone https://github.com/wbthomason/packer.nvim ${PACKER_AUTOLOAD_DIR}/packer.nvim
-endif
+#endif
 
 download_aniseed:
-ifneq (,$(wildcard ./${NVIM_PACKAGE_PATH}/packer/start/aniseed/))
+	@echo "Checking aniseed at ${PACKER_AUTOLOAD_DIR}"
+#ifneq (,$(wildcard ./${PACKER_AUTOLOAD_DIR}/aniseed))
 	@echo "Cloning the package manager: Packer"
 	git clone https://github.com/Olical/aniseed ${PACKER_AUTOLOAD_DIR}/aniseed
-endif
+#endif
 
 update:
 	@echo "Updating Pack dependencies" 
