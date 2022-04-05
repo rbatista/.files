@@ -29,3 +29,4 @@ update:
 
 clean:
 	rm -rf ${PACKER_AUTOLOAD_DIR}/*
+	rm -rf lua/*.lua

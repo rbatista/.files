@@ -8,38 +8,53 @@
       (require custom-ns)))
 
 (defn import-plugin
-  [packer-use name opts]
+  [use name opts]
   (let [custom (. opts :custom)
         opts-wo-custom (tset opts :custom nil)]
-    (packer-use (core.assoc opts 1 name)) ; put plugin as first position
+    (use (core.assoc opts 1 name)) ; put plugin as first position
     (maybe-require custom)))
 
-(defn use [...]
-  "Iterate over the package list extracting pairs (name, opts), call
-  packer startup, and call use from packer for each plugin, also requiring
-  the namespace from ':custom' key"
-  (let [pkgs [...] ; declare vararg to be used on inner function
-        size (core.count pkgs)
-        step 2]
-    (packer.startup
-      (fn [puse]
-        (for [index 1 size step]
-          (let [name (. pkgs index)
-                opts (. pkgs (+ index 1))]
-            (import-plugin puse name opts)))))))
+(defn import-plugins [use plugins]
+  "Iterate over the package list extracting pairs (name, opts)
+  and call use from packer for each plugin, it also require
+  the namespace from ':custom' key to do some kind of setup (deprecated: prefer modules instead)"
+  (each [name opts (pairs plugins)]
+    (print name)
+    (print opts)
+    ;(import-plugin use name opts)
+    ))
 
-(use :wbthomason/packer.nvim {}
-     :Olical/aniseed {}
-     :jiangmiao/auto-pairs {:custom :plugins.auto-pairs}
+(defn import-modules [use modules]
+  (each [index m (ipairs modules)]
+    (let [(ok? plugin) (pcall #(require m))]
+      (print ok?)
+      (print plugin)
+      (when ok?
+        ;(-?> plugin (.plugins (partial import-plugin use)))
+        ))))
 
-     ; clojure
-     :guns/vim-sexp {}
-     :tpope/vim-sexp-mappings-for-regular-people {}
-     :tpope/vim-repeat {}
-     :tpope/vim-surround {}
+; List of tuples where the first element is the user/repo as keyword and
+; the second elementt is the packer options
+(def plugins
+  [{:wbthomason/packer.nvim {}}
+   {:Olical/aniseed {}}
+   {:jiangmiao/auto-pairs {:custom :plugins.auto-pairs}}
 
-     :kien/rainbow_parentheses.vim {}
+   ; clojure
+   {:guns/vim-sexp {}}
+   {:tpope/vim-sexp-mappings-for-regular-people {}}
+   {:tpope/vim-repeat {}}
+   {:tpope/vim-surround {}}
 
-     :marko-cerovac/material.nvim {:custom :theme}
+   {:kien/rainbow_parentheses.vim {}}
 
-     :nvim-treesitter/nvim-treesitter {:run ":TSUpdate" :custom :plugins.treesitter})
+   {:marko-cerovac/material.nvim {:custom :theme}}])
+
+(def modules
+  [:plugins.treesitter])
+
+;(packer.startup
+;  (fn [use]
+    ;(import-plugins use plugins)
+    ;(import-modules use modules)
+;    ))

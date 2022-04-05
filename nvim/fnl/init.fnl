@@ -7,4 +7,4 @@
 (require :key-mappings)
 
 ;import plugin.fnl
-;(require :config.plugin)
+;(print (require :plugins))
