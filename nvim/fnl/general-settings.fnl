@@ -55,6 +55,9 @@
        :cursorline true
        :fillchars "stl: ,stlnc: ,fold: ,vert:│"
 
+      ; backspace
+      :backspace "indent,eol,start"
+
        ; match brackets/parenthesis
        :showmatch true
        :matchtime 5

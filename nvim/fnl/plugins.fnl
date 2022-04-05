@@ -24,11 +24,9 @@
 
 (defn import-modules [use modules]
   (each [_ module-ns (ipairs modules)]
-    (print module-ns)
     (let [mod (require module-ns)]
       (when mod
-        (mod.plugins (partial import-plugin use))
-        ))))
+        (mod.plugins (partial import-plugin use))))))
 
 ; List of tuples where the first element is the user/repo as keyword and
 ; the second elementt is the packer options
@@ -37,23 +35,26 @@
    [:Olical/aniseed {}]
    [:jiangmiao/auto-pairs {:custom :plugins.auto-pairs}]
 
-   ; clojure
-   [:guns/vim-sexp {}]
-   [:tpope/vim-sexp-mappings-for-regular-people {}]
+   [:w0rp/ale {:custom :plugins.ale}]
+
    [:tpope/vim-repeat {}]
    [:tpope/vim-surround {}]
 
-   [:kien/rainbow_parentheses.vim {}]
-
-   [:marko-cerovac/material.nvim {:custom :theme}]])
+    ; file exploration
+   [:preservim/nerdtree {:custom :plugins.nerdtree}]
+   [:Xuyuanp/nerdtree-git-plugin {}]])
 
 (def modules
-  [:modules.treesitter])
+  [:modules.treesitter
+   :modules.telescope
+   :modules.lang.clojure
+   :modules.autocomplete
+   :modules.lsp
+   :modules.ui])
 
 (def packer (require :packer))
 
 (packer.startup
   (fn [use]
     (import-plugins use plugins)
-    (import-modules use modules)
-    ))
+    (import-modules use modules)))
