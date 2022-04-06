@@ -52,11 +52,12 @@
 
        :ruler true
        :relativenumber true
+       :number true
        :cursorline true
        :fillchars "stl: ,stlnc: ,fold: ,vert:│"
 
-      ; backspace
-      :backspace "indent,eol,start"
+       ; backspace
+       :backspace "indent,eol,start"
 
        ; match brackets/parenthesis
        :showmatch true
@@ -65,6 +66,15 @@
        ; always report changed lines
        :report 0
 
+       :scrolloff 10
+
+       :cmdheight 1
+       :showtabline 2
+       :signcolumn "auto:2"
+
+       :undofile true
+       :undolevels 10000
+       :swapfile false
        :wildignore "*swp,*.class,*.pyc,*.png,*.jpg,*.gif,*.zip,*/tmp/*" }]
   (each [option value (pairs options)]
     (core.assoc nvim.o option value)))
