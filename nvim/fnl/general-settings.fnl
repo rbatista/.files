@@ -14,6 +14,7 @@
       {:termguicolors true
        ;support mouse in all modes (Normal, Visual, Insert, Command)
        :mouse "a"
+
        :updatetime 500
        :timeoutlen 500
        :inccommand "split"
@@ -25,7 +26,7 @@
        ;smart search case
        :smartcase true
        ;shared clipboard with linux
-       :clipboard "unnamedplus"
+       :clipboard "unnamedplus,unnamed"
        ; enable visualization of "hidden" chars
        :list true
        :listchars "tab:»·,trail:·,extends:>,precedes:<,eol:↵"
@@ -72,8 +73,12 @@
        :showtabline 2
        :signcolumn "auto:2"
 
+       ; auto save when leaving the buffer
+       :autowrite true
+
        :undofile true
-       :undolevels 10000
+       :undolevels 1000
+       :undoreload 10000
        :swapfile false
        :wildignore "*swp,*.class,*.pyc,*.png,*.jpg,*.gif,*.zip,*/tmp/*" }]
   (each [option value (pairs options)]
