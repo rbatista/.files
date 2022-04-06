@@ -36,11 +36,7 @@
    [:jiangmiao/auto-pairs {:custom :plugins.auto-pairs}]
 
    [:tpope/vim-repeat {}]
-   [:tpope/vim-surround {}]
-
-    ; file exploration
-   [:preservim/nerdtree {:custom :plugins.nerdtree}]
-   [:Xuyuanp/nerdtree-git-plugin {}]])
+   [:tpope/vim-surround {}]])
 
 (def modules
   [:modules.treesitter

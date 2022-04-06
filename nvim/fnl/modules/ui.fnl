@@ -6,7 +6,10 @@
   [use]
   (use :marko-cerovac/material.nvim {})
   (use :lukas-reineke/indent-blankline.nvim {})
-  (use :nvim-lualine/lualine.nvim {:requires :kyazdani42/nvim-web-devicons}))
+  (use :kyazdani42/nvim-web-devicons {})
+  (use :kyazdani42/nvim-tree.lua {})
+  (use :akinsho/bufferline.nvim {})
+  (use :nvim-lualine/lualine.nvim {}))
 
 (defn- setup-colorscheme
   []
@@ -54,8 +57,47 @@
                           :filetype]
                     :lualine_y [:encoding]}}))))
 
+(defn- setup-buffer-line
+  []
+  (let [(ok? bufferline) (pcall #(require :bufferline))]
+    (when ok?
+      (bufferline.setup 
+        {:offsets [{:filetype "NvimTree"
+                    :text ""
+                    :padding 1}]}))))
+
+(defn- setup-autoclose-tree
+  []
+  (nvim.ex.autocmd "BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"))
+
+(defn- setup-tree-keymap
+  []
+  (nvim.set_keymap :n :<leader>tt ":NvimTreeToggle<CR>" {:noremap true})
+  (nvim.set_keymap :n :<leader>tr ":NvimTreeFindFile<CR>" {:noremap true}))
+
+(defn- setup-nvim-tree
+  []
+  (let [(ok? nvim_tree) (pcall #(require :nvim-tree))
+        (conf-ok? conf) (pcall #(require :nvim-tree.config))]
+    (when (and ok? conf-ok?)
+      (let [tree-cb conf.nvim_tree_callback]
+        (nvim_tree.setup
+          {:ignore_ft_on_setup ["startify" "dashboard" "alpha"]
+           :auto_close true
+           :diagnostics {:enable false}
+           :git {:enable true}
+           :view {:hide_root_folder false
+                  :mappings {:custom_only false
+                             :list [{:key ["l" "<CR>" "o"] :cb (tree-cb "edit")}
+                                    {:key "h" :cb (tree-cb "close_node")}
+                                    {:key "v" :cb (tree-cb "vsplit")}]}}}))
+      (setup-tree-keymap)
+      (setup-autoclose-tree))))
+
 (defn setup
   []
   (setup-colorscheme)
   (setup-identline)
-  (setup-statusline))
+  (setup-statusline)
+  (setup-buffer-line)
+  (setup-nvim-tree))
