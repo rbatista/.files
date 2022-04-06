@@ -4,7 +4,10 @@
 
 (defn plugins
   [use]
-  (use :neovim/nvim-lspconfig {}))
+  (use :neovim/nvim-lspconfig
+    ; colorize diagnostics
+    {:requires [:folke/lsp-colors.nvim
+                :folke/trouble.nvim]}))
 
 ;https://github.com/rafaeldelboni/nvim-fennel-lsp-conjure-as-clojure-ide/blob/main/.config/nvim/fnl/config/plugin/lspconfig.fnl
 
@@ -70,6 +73,19 @@
      (cmplsp.update_capabilities lsp-capabilities)
      lsp-capabilities)))
 
+(defn- setup-lsp-diagnostics-colors
+  []
+  (let [(ok? trouble) (pcall #(require :trouble))]
+    (when ok?
+      (trouble.setup {})))
+  (let [(ok? lspcolors) (pcall #(require :lsp-colors))]
+    (when ok?
+      (lspcolors.setup
+        {:Error "#db4b4b"
+         :Warning "#e0af68"
+         :Information "#0db9d7"
+         :Hint "#10B981"}))))
+
 (defn setup
   []
   (let [(lsp-ok? lsp) (pcall #(require :lspconfig))]
@@ -77,6 +93,7 @@
       (if (= (nvim.fn.has "nvim-0.6") 1)
         (define-signs "Diagnostic")
         (define-signs "LspDiagnostics"))
+      (setup-lsp-diagnostics-colors)
       (let [handlers {"textDocument/publishDiagnostics" (lsp-diagnostic)
                       "textDocument/hover" (lsp-hover)
                       "textDocument/signatureHelp" (signature-help)}]
