@@ -35,8 +35,6 @@
    [:Olical/aniseed {}]
    [:jiangmiao/auto-pairs {:custom :plugins.auto-pairs}]
 
-   [:w0rp/ale {:custom :plugins.ale}]
-
    [:tpope/vim-repeat {}]
    [:tpope/vim-surround {}]
 
