@@ -9,3 +9,5 @@
 
 (set nvim.g.NERDTreeShowHidden 1)
 (set nvim.g.NERDTreeIgnore ["\\.git$[[dir]]"])
+(set nvim.g.NERDTreeQuitOnOpen 1)
+(set nvim.g.NERDTreeGitStatusUseNerdFonts 1)
