@@ -44,6 +44,7 @@
    :modules.lang.clojure
    :modules.autocomplete
    :modules.lsp
+   :modules.git
    :modules.ui])
 
 (def packer (require :packer))

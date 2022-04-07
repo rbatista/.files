@@ -62,9 +62,11 @@
   (let [(ok? bufferline) (pcall #(require :bufferline))]
     (when ok?
       (bufferline.setup 
-        {:offsets [{:filetype "NvimTree"
-                    :text ""
-                    :padding 1}]}))))
+        {:options
+         {;:name_formatter bufferline-name-formatter
+          :offsets [{:filetype "NvimTree"
+                     :text ""
+                     :padding 1}]}}))))
 
 (defn- setup-autoclose-tree
   []
@@ -83,9 +85,9 @@
       (let [tree-cb conf.nvim_tree_callback]
         (nvim_tree.setup
           {:ignore_ft_on_setup ["startify" "dashboard" "alpha"]
-           :auto_close true
            :diagnostics {:enable false}
            :git {:enable true}
+           :actions {:open_file {:quit_on_open true}}
            :view {:hide_root_folder false
                   :mappings {:custom_only false
                              :list [{:key ["l" "<CR>" "o"] :cb (tree-cb "edit")}

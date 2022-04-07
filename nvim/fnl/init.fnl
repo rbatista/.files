@@ -6,7 +6,8 @@
              lsp modules.lsp
              autocomplete modules.autocomplete
              clojure modules.lang.clojure
-             telescope modules.telescope}})
+             telescope modules.telescope
+             git modules.git}})
 
 (require :general-settings)
 (require :plugins)
@@ -18,4 +19,5 @@
 (clojure.setup)
 (autocomplete.setup)
 (lsp.setup)
+(git.setup)
 (ui.setup)
