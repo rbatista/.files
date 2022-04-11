@@ -36,7 +36,9 @@
    [:jiangmiao/auto-pairs {:custom :plugins.auto-pairs}]
 
    [:tpope/vim-repeat {}]
-   [:tpope/vim-surround {}]])
+   [:tpope/vim-surround {}]
+
+   [:mhinz/vim-startify {}]])
 
 (def modules
   [:modules.treesitter
