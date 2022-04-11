@@ -7,7 +7,8 @@
              autocomplete modules.autocomplete
              clojure modules.lang.clojure
              telescope modules.telescope
-             git modules.git}})
+             git modules.git
+             term modules.terminal}})
 
 (require :general-settings)
 (require :plugins)
@@ -16,6 +17,7 @@
 ;import plugin.fnl
 (treesitter.setup)
 (telescope.setup)
+(term.setup)
 (clojure.setup)
 (autocomplete.setup)
 (lsp.setup)

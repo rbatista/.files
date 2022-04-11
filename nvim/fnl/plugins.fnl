@@ -41,6 +41,7 @@
 (def modules
   [:modules.treesitter
    :modules.telescope
+   :modules.terminal
    :modules.lang.clojure
    :modules.autocomplete
    :modules.lsp
