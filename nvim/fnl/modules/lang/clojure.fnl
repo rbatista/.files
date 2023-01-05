@@ -24,7 +24,7 @@
         :sexp_round_head_wrap_element   "<Leader>W"
         :sexp_swap_element_backward     "<Leader>T"
         :sexp_swap_element_forward      "<Leader>t"
-        :sexp_raise_element             "<Leader>'"
+        :sexp_raise_element             "<LocalLeader>O"
         :sexp_emit_head_element         "<Leader>{"
         :sexp_emit_tail_element         "<Leader>}"
         :sexp_capture_prev_element      "<Leader>["
