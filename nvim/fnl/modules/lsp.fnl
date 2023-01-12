@@ -67,11 +67,9 @@
 
 (defn- capabilities
  []
- (let [(ok? cmplsp) (pcall #(require :cmp_nvim_lsp))
-       lsp-capabilities (vim.lsp.protocol.make_client_capabilities)]
-   (if ok?
-     (cmplsp.update_capabilities lsp-capabilities)
-     lsp-capabilities)))
+ (let [(ok? cmplsp) (pcall #(require :cmp_nvim_lsp))]
+   (when ok?
+     (cmplsp.default_capabilities))))
 
 (defn- setup-lsp-diagnostics-colors
   []
