@@ -132,3 +132,10 @@ https://github.com/guns/vim-sexp
 | `<leader>hs` | Stage hunk over the cursor (works on visual mode) |
 | `<leader>hu` | Undo hunk over the cursor (works on visual mode) |
 | `<leader>hp` | Preview changes in hunk over the cursor |
+
+## Autocomplete
+| shortcut | What does it do? |
+| -------- | ---------------- |
+| `<Tab>` / `<C-n>`  | Select the next item in the autocomplete menu |
+| `<S-Tab>` / `<C-p>`  | Select the previous item in the autocomplete menu |
+| `<CR>` | Confirm the selected item and closes the autocomplete menu |
