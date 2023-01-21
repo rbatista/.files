@@ -30,4 +30,6 @@
         :sexp_capture_prev_element      "<Leader>["
         :sexp_capture_next_element      "<Leader>]"
         :sexp_flow_to_next_open_bracket "<M-f>"
-        :sexp_flow_to_prev_open_bracket "<M-b>"}))
+        :sexp_flow_to_prev_open_bracket "<M-b>"})
+
+  (set nvim.g.conjure#mapping#doc_word "K"))
