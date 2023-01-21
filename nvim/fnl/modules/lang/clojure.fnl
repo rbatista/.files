@@ -3,7 +3,7 @@
 
 (defn plugins
   [use]
-  (use :Olical/conjure {:requires ["Olical/AnsiEsc" "tami5/compe-conjure"]})
+  (use :Olical/conjure {:requires ["Olical/AnsiEsc"]})
   (use :guns/vim-sexp {})
   (use :tpope/vim-sexp-mappings-for-regular-people {}))
 
