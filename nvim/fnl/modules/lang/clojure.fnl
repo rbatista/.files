@@ -3,9 +3,14 @@
 
 (defn plugins
   [use]
-  (use :Olical/conjure {:requires ["Olical/AnsiEsc"]})
+  (use :Olical/conjure {})
+  (use :m00qek/baleia.nvim {:tag "v1.2.0"}) ; colorize ANSI
   (use :guns/vim-sexp {})
   (use :tpope/vim-sexp-mappings-for-regular-people {}))
+
+(defn- setup-baleia-conjure-logs
+  []
+  (nvim.ex.autocmd "BufWinEnter conjure-log-* call g:baleia.automatically(bufnr('%'))"))
 
 (defn setup []
   (set nvim.g.sexp_filetypes "clojure,scheme,lisp,timl,fennel,janet")
@@ -32,4 +37,12 @@
         :sexp_flow_to_next_open_bracket "<M-f>"
         :sexp_flow_to_prev_open_bracket "<M-b>"})
 
-  (set nvim.g.conjure#mapping#doc_word "K"))
+  (set nvim.g.conjure#mapping#doc_word "K")
+  (set nvim.g.conjure#log#strip_ansi_escape_sequences_line_limit 0)
+
+  (let [(ok? baleia) (pcall #(require :baleia))]
+    (when (not ok?)
+      (print (.. "config error: " baleia)))
+    (when ok?
+      (set nvim.g.baleia (baleia.setup {:line_starts_at 3}))
+      (setup-baleia-conjure-logs))))
