@@ -8,14 +8,19 @@
                                      :PaterJason/cmp-conjure]}))
 
 (def- cmp-src-menu-items
-  {:buffer "buff"
-   :conjure "conj"
+  {:buffer   "buff"
+   :conjure  "conj"
    :nvim_lsp "lsp"})
 
 (def- cmp-srcs
   [{:name :nvim_lsp}
    {:name :conjure}
    {:name :buffer}])
+
+(fn has-words-before []
+  (let [(line col) (unpack (vim.api.nvim_win_get_cursor 0))]
+    (and (not= col 0)
+         (= (: (: (. (vim.api.nvim_buf_get_lines 0 (- line 1) line true) 1) :sub col col) :match "%s") nil))))
 
 (defn setup
   []
@@ -33,18 +38,16 @@
                     :<C-Space> (cmp.mapping.complete)
                     :<C-e> (cmp.mapping.close)
                     :<CR> (cmp.mapping.confirm {:behavior cmp.ConfirmBehavior.Insert
-                                               :select true})
+                                                :select true})
                     :<Tab> (cmp.mapping (fn [fallback]
                                             (if
                                               (cmp.visible) (cmp.select_next_item)
-                                              (luasnip.expand_or_jumpable) (luasnip.expand_or_jump)
                                               (has-words-before) (cmp.complete)
                                               :else (fallback)))
                                           {1 :i 2 :s})
-                      :<S-Tab> (cmp.mapping (fn [fallback]
-                                              (if
-                                                (cmp.visible) (cmp.select_prev_item)
-                                                (luasnip.jumpable -1) (luasnip.jump -1)
-                                                :else (fallback)))
-                                            {1 :i 2 :s})}
+                    :<S-Tab> (cmp.mapping (fn [fallback]
+                                            (if
+                                              (cmp.visible) (cmp.select_prev_item)
+                                              :else (fallback)))
+                                          {1 :i 2 :s})}
           :sources cmp-srcs}))))

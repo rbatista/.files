@@ -17,6 +17,7 @@
     (when ok?
       (material.setup
         {:custom_highlights {:FloatBorder {:fg "#1A1A1A"}}
+         :disable {:term_colors false}
          :borders true
          :high_visibility {:darker true}
          :styles {:comments {:italic true}}})
