@@ -81,19 +81,23 @@
 (defn- setup-nvim-tree
   []
   (let [(ok? nvim_tree) (pcall #(require :nvim-tree))
-        (conf-ok? conf) (pcall #(require :nvim-tree.config))]
-    (when (and ok? conf-ok?)
-      (let [tree-cb conf.nvim_tree_callback]
+        ;(conf-ok? conf) (pcall #(require :nvim-tree.config))
+        ]
+    (when (and ok? ;conf-ok?
+               )
+     ; (let [tree-cb conf.nvim_tree_callback]
         (nvim_tree.setup
-          {:ignore_ft_on_setup ["startify" "dashboard" "alpha"]
+          {;:ignore_ft_on_setup ["startify" "dashboard" "alpha"]
            :diagnostics {:enable false}
            :git {:enable true}
            :actions {:open_file {:quit_on_open true}}
            :view {:hide_root_folder false
-                  :mappings {:custom_only false
-                             :list [{:key ["l" "<CR>" "o"] :cb (tree-cb "edit")}
-                                    {:key "h" :cb (tree-cb "close_node")}
-                                    {:key "v" :cb (tree-cb "vsplit")}]}}}))
+                  ;:mappings {:custom_only false
+                  ;           :list [{:key ["l" "<CR>" "o"] :cb (tree-cb "edit")}
+                  ;                  {:key "h" :cb (tree-cb "close_node")}
+                   ;                 {:key "v" :cb (tree-cb "vsplit")}]}
+                  }})
+        ;)
       (setup-tree-keymap)
       (setup-autoclose-tree))))
 

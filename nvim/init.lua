@@ -5,6 +5,9 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 local fmt = string.format
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Work out where our plugins will be stored.
 -- local pack_path = fn.stdpath("data") .. "/site/pack"
 

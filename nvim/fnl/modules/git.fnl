@@ -5,6 +5,8 @@
   [use]
   ; show git changes on ruler
   (use :lewis6991/gitsigns.nvim {})
+  ; git diff
+  (use :sindrets/diffview.nvim {})
   ; enale permlink to git repo (github)
   (use :ruifm/gitlinker.nvim {:requires :nvim-lua/plenary.nvim}))
 
