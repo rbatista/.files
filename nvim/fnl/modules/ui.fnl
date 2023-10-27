@@ -27,16 +27,12 @@
 
 (defn- setup-identline
   []
-  (let [(ok? blankline) (pcall #(require :indent_blankline))]
+  (let [(ok? blankline) (pcall #(require :ibl))]
     (when ok?
       (blankline.setup
-        {:show_first_indent_level false
-         :use_treesitter true
-         :show_end_of_line true
-         :buftype_exclude ["terminal" "nofile"]})
-
-      (set nvim.g.material_style :palenight)
-      (nvim.ex.colorscheme :material))))
+       {:scope {:exclude {:language  ["clojure"]}}
+        :exclude {:buftypes  ["terminal" "nofile"]
+                  :filetypes ["help" "startify" "dashboard" "packer" "NvimTree" "clojure"]}}))))
 
 (defn lsp_connection []
   (if (vim.tbl_isempty (vim.lsp.buf_get_clients 0)) "" ""))
@@ -91,12 +87,13 @@
            :diagnostics {:enable false}
            :git {:enable true}
            :actions {:open_file {:quit_on_open true}}
-           :view {:hide_root_folder false
+           ;:view {;:hide_root_folder false
                   ;:mappings {:custom_only false
                   ;           :list [{:key ["l" "<CR>" "o"] :cb (tree-cb "edit")}
                   ;                  {:key "h" :cb (tree-cb "close_node")}
                    ;                 {:key "v" :cb (tree-cb "vsplit")}]}
-                  }})
+           ;       }
+           })
         ;)
       (setup-tree-keymap)
       (setup-autoclose-tree))))
