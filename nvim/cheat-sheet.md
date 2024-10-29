@@ -51,7 +51,7 @@ https://github.com/guns/vim-sexp
 | `<LocalLeader>@` | `dsf` | Splice the current form into its parent |
 | `<LocalLeader>o`  | Raise a form | 
 | `<Leader>'`  | Raise a element | 
-| `<leader>rn` | Rename (LSP) |
+| `<leader>ln` | Rename (LSP) |
 | `<leader>a<move>` | Code action (LSP), for example fix import for the current word: `<leader>aiw` |
 | `cram` | Add missing lib spec |
 | `crcn` | Clean namespace |
