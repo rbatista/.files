@@ -51,7 +51,7 @@ https://github.com/guns/vim-sexp
 | `<LocalLeader>@` | `dsf` | Splice the current form into its parent |
 | `<LocalLeader>o`  | Raise a form | 
 | `<Leader>'`  | Raise a element | 
-| `<leader>rn` | Rename (LSP) |
+| `<leader>ln` | Rename (LSP) |
 | `<leader>a<move>` | Code action (LSP), for example fix import for the current word: `<leader>aiw` |
 | `cram` | Add missing lib spec |
 | `crcn` | Clean namespace |
@@ -102,19 +102,24 @@ https://github.com/guns/vim-sexp
 | `<localleader>tn` | Run all within this namespace. |
 | `<localleader>tc`   | Run the specific test under the cursor. |
 
-## Nerdtree
+## nvim-tree
 | shortcut | What does it do? |
 | -------- | ---------------- |
-| `tt` | Toggle NerdTree. |
-| `tf` | Open NerdTree on current file. |
-| `ma` | On nerdtree > Add a file on the selected directory |
-| `mm` | On nerdtree > Move the selected file |
-| `s` | On nerdtree > Open the selected file in vertical split |
-| `i` | On nerdtree > Open the selected file in horizontal split |
-| `I` | Toggle hidden files |
+| `tt` | Toggle nvim-tree. |
+| `tf` | Open nvim-tree on current file. |
+| `a` | On nvim-tree > Add a file on the selected directory |
+| `r` | On nvim-tree > Rename selected file |
+| `d` | Delete |
+| `c` | Copy |
+| `p` | Paste |
+| `<C-v>` | On nvim-tree > Open the selected file in vertical split |
+| `<C-x>` | On nvim-tree > Open the selected file in horizontal split |
+| `H` | Toggle hidden files |
+| `I` | Toggle gitignore files |
 | `o` | Open/close node |
-| `O` | Open/close node recursively |
-| `R` | Refresh current root |
+| `R` | Refresh |
+| `y` | Copy Name |
+| `Y` | Copy relative Path | 
 
 ## FZF
 | shortcut | What does it do? |
@@ -132,3 +137,10 @@ https://github.com/guns/vim-sexp
 | `<leader>hs` | Stage hunk over the cursor (works on visual mode) |
 | `<leader>hu` | Undo hunk over the cursor (works on visual mode) |
 | `<leader>hp` | Preview changes in hunk over the cursor |
+
+## Autocomplete
+| shortcut | What does it do? |
+| -------- | ---------------- |
+| `<Tab>` / `<C-n>`  | Select the next item in the autocomplete menu |
+| `<S-Tab>` / `<C-p>`  | Select the previous item in the autocomplete menu |
+| `<CR>` | Confirm the selected item and closes the autocomplete menu |
