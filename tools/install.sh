@@ -7,7 +7,9 @@ BASE_DIR="$(dirname "$INSTALL_DIR")"
 $(cd $BASE_DIR && git pull origin master)
 
 # install brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+if ! command -v brew &> /dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
 
 # vim dependencies
 
@@ -23,7 +25,9 @@ brew install ripgrep
 brew install neovim
 
 # backup nvim configs
-mv --backup=t $HOME/.config/nvim $HOME/.config/nvim_bkp 
+if [ -d "$HOME/.config/nvim" ]; then
+  mv --backup=t $HOME/.config/nvim $HOME/.config/nvim_bkp
+fi
 
 # create link
 ln -s $BASE_DIR/nvim $HOME/.config/nvim
