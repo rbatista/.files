@@ -95,6 +95,17 @@
                   "textDocument/signatureHelp" (signature-help)}]
     (vim.lsp.config :* {:on_attach on_attach
                         :capabilities (capabilities)
-                        :handlers handlers})))
+                        :handlers handlers})
+ 
+     ;; Clojure
+     (vim.lsp.config :clojure_lsp {:root_dir (fn [bufnr on_dir]
+                                               (let [pattern (vim.api.nvim_buf_get_name bufnr)
+                                                     util (require :lspconfig.util)
+                                                     fallback (vim.loop.cwd)
+                                                     patterns [:project.clj :deps.edn :build.boot :shadow-cljs.edn :.git :bb.edn]
+                                                     root ((util.root_pattern patterns) pattern)]
+                                                 (on_dir (or root fallback))))})
+
+     (vim.lsp.enable :clojure_lsp)))
 
 ; No such group or event: nvim.lsp.enable FileType

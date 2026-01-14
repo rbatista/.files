@@ -36,9 +36,9 @@
 
 (defn lsp_connection []
   (let [clients (if (= (nvim.fn.has "nvim-0.10") 1)
-                  (vim.lsp.get_clients 0)
+                  (vim.lsp.get_clients)
                   (vim.lsp.buf_get_clients 0))]
-    (if (vim.tbl_isempty ) "" "")))
+    (if (vim.tbl_isempty clients) "" "")))
 
 (defn setup-statusline
   []
@@ -48,13 +48,14 @@
         {:options {:theme :palenight
                    :disabled_filetypes ["alpha" "dashboard" "NvimTree" "Outline"]}
          :sections {:lualine_x [[:diagnostics {:sections [:error
-                                                    :warn
-                                                    :info
-                                                    :hint]
-                                         :sources [:nvim_lsp]}]
-                          [lsp_connection]
-                          :location
-                          :filetype]
+                                                          :warn
+                                                          :info
+                                                          :hint]
+                                               :sources [:nvim_lsp]}]
+                                ;:lsp_status
+                                [lsp_connection]
+                                :location
+                                :filetype]
                     :lualine_y [:encoding]}}))))
 
 (defn- setup-buffer-line
