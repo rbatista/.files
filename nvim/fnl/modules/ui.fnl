@@ -35,7 +35,10 @@
                   :filetypes ["help" "startify" "dashboard" "packer" "NvimTree" "clojure"]}}))))
 
 (defn lsp_connection []
-  (if (vim.tbl_isempty (vim.lsp.buf_get_clients 0)) "" ""))
+  (let [clients (if (= (nvim.fn.has "nvim-0.10") 1)
+                  (vim.lsp.get_clients 0)
+                  (vim.lsp.buf_get_clients 0))]
+    (if (vim.tbl_isempty ) "" "")))
 
 (defn setup-statusline
   []

@@ -86,16 +86,15 @@
 
 (defn setup
   []
-  (let [(lsp-ok? lsp) (pcall #(require :lspconfig))]
-    (when lsp-ok?
-      (if (= (nvim.fn.has "nvim-0.6") 1)
+  (if (= (nvim.fn.has "nvim-0.6") 1)
         (define-signs "Diagnostic")
         (define-signs "LspDiagnostics"))
-      (setup-lsp-diagnostics-colors)
-      (let [handlers {"textDocument/publishDiagnostics" (lsp-diagnostic)
-                      "textDocument/hover" (lsp-hover)
-                      "textDocument/signatureHelp" (signature-help)}]
-        (lsp.clojure_lsp.setup
-          {:on_attach on_attach
-           :capabilities (capabilities)
-           :handlers handlers})))))
+  (setup-lsp-diagnostics-colors)
+  (let [handlers {"textDocument/publishDiagnostics" (lsp-diagnostic)
+                  "textDocument/hover" (lsp-hover)
+                  "textDocument/signatureHelp" (signature-help)}]
+    (vim.lsp.config :* {:on_attach on_attach
+                        :capabilities (capabilities)
+                        :handlers handlers})))
+
+; No such group or event: nvim.lsp.enable FileType

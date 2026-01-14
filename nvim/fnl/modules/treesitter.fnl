@@ -4,7 +4,7 @@
 (defn plugins
   [import-plugin]
   (import-plugin :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"})
-  (import-plugin :p00f/nvim-ts-rainbow {}))
+  (import-plugin :HiPhish/rainbow-delimiters.nvim {}))
 
 (defn setup
   []
