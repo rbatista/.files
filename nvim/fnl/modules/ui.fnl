@@ -52,8 +52,8 @@
                                                           :info
                                                           :hint]
                                                :sources [:nvim_lsp]}]
-                                ;:lsp_status
-                                [lsp_connection]
+                                :lsp_status
+                                ;[lsp_connection]
                                 :location
                                 :filetype]
                     :lualine_y [:encoding]}}))))
