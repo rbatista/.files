@@ -8,7 +8,8 @@
              clojure modules.lang.clojure
              telescope modules.telescope
              git modules.git
-             term modules.terminal}})
+             term modules.terminal
+             eca modules.eca}})
 
 (require :general-settings)
 (require :plugins)
@@ -23,3 +24,4 @@
 (lsp.setup)
 (git.setup)
 (ui.setup)
+(eca.setup)

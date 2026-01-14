@@ -30,6 +30,7 @@
 
 ; List of tuples where the first element is the user/repo as keyword and
 ; the second elementt is the packer options
+; a :custom option will require the given namespace (as keyword)
 (def plugins
   [[:wbthomason/packer.nvim {}]
    [:Olical/aniseed {}]
@@ -48,7 +49,8 @@
    :modules.autocomplete
    :modules.lsp
    :modules.git
-   :modules.ui])
+   :modules.ui
+   :modules.eca])
 
 (def packer (require :packer))
 
