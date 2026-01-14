@@ -9,7 +9,8 @@
   (use :kyazdani42/nvim-web-devicons {})
   (use :kyazdani42/nvim-tree.lua {})
   (use :akinsho/bufferline.nvim {})
-  (use :nvim-lualine/lualine.nvim {}))
+  (use :nvim-lualine/lualine.nvim {})
+  (use :arkav/lualine-lsp-progress {}))
 
 (defn- setup-colorscheme
   []
@@ -47,12 +48,13 @@
       (lualine.setup
         {:options {:theme :palenight
                    :disabled_filetypes ["alpha" "dashboard" "NvimTree" "Outline"]}
-         :sections {:lualine_x [[:diagnostics {:sections [:error
+         :sections {:lualine_x [:lsp_progress
+                                [:diagnostics {:sections [:error
                                                           :warn
                                                           :info
                                                           :hint]
                                                :sources [:nvim_lsp]}]
-                                :lsp_status
+                                ;:lsp_status
                                 ;[lsp_connection]
                                 :location
                                 :filetype]
