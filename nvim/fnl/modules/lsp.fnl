@@ -12,16 +12,12 @@
 ;https://github.com/rafaeldelboni/nvim-fennel-lsp-conjure-as-clojure-ide/blob/main/.config/nvim/fnl/config/plugin/lspconfig.fnl
 
 ;symbols to show for lsp diagnostics
-(defn define-signs
-  [prefix]
-  (let [error (.. prefix "SignError")
-        warn  (.. prefix "SignWarn")
-        info  (.. prefix "SignInfo")
-        hint  (.. prefix "SignHint")]
-  (vim.fn.sign_define error {:text "" :texthl error})
-  (vim.fn.sign_define warn  {:text "" :texthl warn})
-  (vim.fn.sign_define info  {:text "" :texthl info})
-  (vim.fn.sign_define hint  {:text "" :texthl hint})))
+(defn- setup-lsp-signs
+  []
+  (vim.diagnostic.config {:signs {:text {vim.diagnostic.severity.ERROR ""
+                                         vim.diagnostic.severity.WARN  ""
+                                         vim.diagnostic.severity.INFO  ""
+                                         vim.diagnostic.severity.HINT  ""}}}))
 
 (defn- lsp-diagnostic
   []
@@ -86,9 +82,7 @@
 
 (defn setup
   []
-  (if (= (nvim.fn.has "nvim-0.6") 1)
-        (define-signs "Diagnostic")
-        (define-signs "LspDiagnostics"))
+  (setup-lsp-signs)
   (setup-lsp-diagnostics-colors)
   (let [handlers {"textDocument/publishDiagnostics" (lsp-diagnostic)
                   "textDocument/hover" (lsp-hover)
